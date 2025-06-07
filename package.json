@@ -16,5 +16,9 @@
     "svelte-check": "^4.1.6",
     "typescript": "~5.8.3",
     "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "@types/chart.js": "^2.9.41",
+    "chart.js": "^4.4.9"
   }
 }

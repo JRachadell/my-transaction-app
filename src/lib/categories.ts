@@ -8,16 +8,18 @@ type CategoryRules = {
  * The system will check rules in the order they are defined.
  * - For simple matching, use a string (case-insensitive).
  * - For more complex matching, use a Regular Expression.
- *
- * Example:
- * const CATEGORY_RULES: CategoryRules = {
- *   'Coffee': ['STARBUCKS', 'PEETS', 'PHILZ'],
- *   'Groceries': ["WHOLE FOODS", "Trader Joe's", "SAFEWAY"],
- *   'Tech Services': [/\bAWS\b/i, /AMAZON.COM\*WEBSERVICES/i] // Use \b for whole word matching
- * };
  */
-const CATEGORY_RULES: CategoryRules = {
-  // TODO: Fill this object with your own categories and keywords.
+export const CATEGORY_RULES: CategoryRules = {
+  'Food': ["CHIPOTLE", "COFFEE BEAN", "MCDONALDS", "UBER EATS", "PIZZA", "DONUT", "TACO BELL", "RESTAURANT", "PANDA EXPRESS", "BURGER", "DOORDASH", 'STARBUCKS', "JIMMY JOHNS"],
+  'Services': ['NETFLIX', 'VERIZON', 'SPOTIFY', 'ADOBE', 'GITHUB', 'AMAZON PRIME', 'SUBSCRIPTION', 'STEAM GAMES'],
+  'Groceries': ["WHOLE FOODS", "TRADER JOE'S", "TRADER JOES", "SAFEWAY", "COSTCO", "KROGER", "GROCERY", "GROCERIES", "MEAL KIT"],
+  'Transportation': ['GAS STATION', 'SHELL', 'CHEVRON', 'UBER RIDE', 'LYFT', 'CAR', 'TRAIN', 'FLIGHT', 'BUS'],
+  'Work': ['SALARY', 'TAX', 'WORK'],
+  'Transfers': ["PAYPAL", "VENMO"],
+  'Online Shopping': ['AMAZON.COM', 'FLOWERS.COM', '.COM'],
+  'Home': ['RENT', 'HOME DEPOT', "ELECTRIC BILL", "LOWE'S", 'GAS BILL'],
+  'Shopping': ['TARGET', 'BEST BUY', 'GAMES', "MACY'S"],
+  'Health': ['CVS', 'WALGREENS', 'PHARMACY', 'HEALTH']
 };
 
 /**
@@ -31,12 +33,10 @@ export function getCategory(description: string): string {
   for (const [category, rules] of Object.entries(CATEGORY_RULES)) {
     for (const rule of rules) {
       if (typeof rule === 'string') {
-        // Simple string matching (case-insensitive)
         if (lowerCaseDescription.includes(rule.toLowerCase())) {
           return category;
         }
       } else if (rule instanceof RegExp) {
-        // Regular expression matching
         if (rule.test(description)) {
           return category;
         }
@@ -44,5 +44,5 @@ export function getCategory(description: string): string {
     }
   }
 
-  return 'Uncategorized'; // Default category if no match is found
+  return 'Uncategorized';
 }
