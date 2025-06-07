@@ -1,47 +1,17 @@
-# Svelte + TS + Vite
+Help from Gemini 2.5 pro was used to implement most of the features within the desired time. The chat was exported and included inside this repository, called gemini.
 
-This template should help get you started developing with Svelte and TypeScript in Vite.
+The project can be initialized by running npm install and then npm run dev.
 
-## Recommended IDE Setup
+The hardest part was approaching the categorization. This is a problem that I have faced many times, mostly in Python, but always in the backend, never in the front-end. A heavy npm library containing dictionaries could be used to tackle this problem, but I wanted to implement something myself, so after chatting with Gemini I settled for using some short lists and word matching.
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+I relied on Gemini to create a boilerplate containing a table with the features that I needed. Some of the errors that I manually fixed were related to imports and the rendering of the transactions. I implemented some CSS changes manually to improve UX. After that, I asked it to help with the customization of categories inside the table and adding labels to the form fields.
 
-## Need an official Svelte framework?
+I added a table with the total and average spending by category below the main table.
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+My next objective was to add a bar chart with the spending by category. This was tricky because I usually use react-chartjs-2, but its Svelte equivalent was not available to Svelte 5, so I had to rely on pure chart.js. The chart could be improved, but it works well enough.
 
-## Technical considerations
+After a few problems with re-renders because of the chart, I was able to include it without issues. I wanted to implement some more features, but time was running out. I do not like to rely that much on AI agents, but in this case, the time constraint would have made it harder to do a lot by hand in a short time. I tried not to focus that much on CSS, only the minimum necessary for the UX to work correctly. The categorization uses mostly generic keywords, but for it to work better an expansion of the dictionaries would be necessary. I'm sure tools for this must already exist in JS/TS.
 
-**Why use this over SvelteKit?**
+One more thing I wanted to add is a data integrity step to be sure some transactions with incorrect data would not break the table, for example, a non-existent date or a string inside amount, but again, I ran out of time.
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
-
-This template contains as little as possible to get started with Vite + TypeScript + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
-
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
-
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
-
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
-
-**Why include `.vscode/extensions.json`?**
-
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
-
-**Why enable `allowJs` in the TS template?**
-
-While `allowJs: false` would indeed prevent the use of `.js` files in the project, it does not prevent the use of JavaScript syntax in `.svelte` files. In addition, it would force `checkJs: false`, bringing the worst of both worlds: not being able to guarantee the entire codebase is TypeScript, and also having worse typechecking for the existing JavaScript. In addition, there are valid use cases in which a mixed codebase may be relevant.
-
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/rixo/svelte-hmr#svelte-hmr).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```ts
-// store.ts
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
-```
+The "learning from user corrections" could not be easily implemented with my current categorization approach, so I didn't focus on implementing it.
